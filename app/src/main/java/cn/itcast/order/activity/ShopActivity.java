@@ -1,0 +1,115 @@
+package cn.itcast.order.activity;
+
+import android.os.Handler;
+import android.os.Message;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.IOException;
+import java.security.Key;
+import java.util.List;
+
+import cn.itcast.order.R;
+import cn.itcast.order.adapter.ShopAdapter;
+import cn.itcast.order.bean.ShopBean;
+import cn.itcast.order.utils.Constant;
+import cn.itcast.order.utils.JsonParse;
+import cn.itcast.order.views.ShopListView;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+public class ShopActivity extends AppCompatActivity
+{
+    private TextView tv_back,tv_title;
+    private ShopListView slv_list;
+    private ShopAdapter adapter;
+    public static final int MSG_SHOP_OK=1;
+    private MHandler mHandler;
+    private RelativeLayout rl_title_bar;
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_shop);
+        mHandler=new MHandler();
+        initData();
+        init();
+    }
+    private void init()
+    {
+        tv_back=(TextView) findViewById(R.id.tv_back);
+        tv_title=(TextView) findViewById(R.id.tv_title);
+        tv_title.setText("店铺");
+        rl_title_bar=(RelativeLayout) findViewById(R.id.title_bar);
+        rl_title_bar.setBackgroundColor(getResources().getColor(R.color.blue_color));
+        tv_back.setVisibility(View.GONE);
+        slv_list=(ShopListView) findViewById(R.id.slv_list);
+        adapter=new ShopAdapter(this);
+        slv_list.setAdapter(adapter);
+    }
+    private void initData()
+    {
+        OkHttpClient okHttpClient =new OkHttpClient();
+        Request request =new Request.Builder().url(Constant.WEB_SITE+Constant.REQUEST_SHOP_URL).build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e)
+            { }
+            @Override
+            public void onResponse(Call call, Response response) throws IOException
+            {
+                String res=response.body().string();
+                Message msg=new Message();
+                msg.what=MSG_SHOP_OK;
+                msg.obj=res;
+                mHandler.sendMessage(msg);
+            }
+        });
+    }
+    class MHandler extends Handler
+    {
+        @Override
+        public  void  dispatchMessage(Message msg)
+        {
+            super.dispatchMessage(msg);
+            switch (msg.what)
+            {
+                case  MSG_SHOP_OK:
+                    if (msg.obj!=null)
+                    {
+                        String vlResult=(String)msg.obj;
+                        List<ShopBean>pythonList=JsonParse.getInstance().getShopList(vlResult);
+                    }
+                    break;
+            }
+        }
+    }
+    protected long exitTime;
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode==KeyEvent.KEYCODE_BACK&&event.getAction()==KeyEvent.ACTION_DOWN)
+        {
+            if ((System.currentTimeMillis()-exitTime)>2000)
+            {
+                Toast.makeText(ShopActivity.this,"再按一次退出订餐应用",Toast.LENGTH_SHORT).show();
+            }
+            else
+                {
+                    ShopActivity.this.finish();
+                    System.exit(0);
+                }
+                return true;
+        }
+        return super.onKeyDown(keyCode,event);
+    }
+}

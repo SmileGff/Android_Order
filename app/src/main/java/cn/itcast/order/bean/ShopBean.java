@@ -9,14 +9,14 @@ public class ShopBean implements Serializable
     private static  final  long serialVersionUID=1L;//序列化时保持ShopBean类版本的兼容性
     private int id;//店铺ID
     private String shopName;//店铺名称
-    private int saleNum;
-    private BigDecimal offerPrice;
-    private BigDecimal distributionCost;
-    private String welfare;
-    private String time;
-    private String shopPic;
-    private String shopNotice;
-    private List<FoodBean> foodList;
+    private int saleNum;//月售
+    private BigDecimal offerPrice;//起送价格
+    private BigDecimal distributionCost;//配送费用
+    private String welfare;//福利
+    private String time;//配送时间
+    private String shopPic;//店铺图片
+    private String shopNotice;//公告
+    private List<FoodBean> foodList;//菜单列表
     public int getId()
     { return id; }
 

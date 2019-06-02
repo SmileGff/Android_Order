@@ -8,11 +8,11 @@ public class FoodBean implements Serializable
     private static  final  long serialVersionUID=1L;//序列化时保持ShopBean类版本的兼容性
     private int foodId;//ID
     private String foodName;//名称
-    private String taste;
-    private int saleNum;
-    private BigDecimal price;
-    private int count;
-    private String foodPic;
+    private String taste;//口味
+    private int saleNum;//月售量
+    private BigDecimal price;//价格
+    private int count;//添加到购物车中的数量
+    private String foodPic;//菜的图片
     public int getFoodId()
     { return foodId; }
 
