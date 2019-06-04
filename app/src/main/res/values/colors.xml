@@ -10,4 +10,10 @@
     <color name="car_gray_color">#454545</color>
     <color name="account_color">#ff9500</color>
     <color name="account_gray_color">#535353</color>
+    <color name="taste_bg_color">#f6f6f6</color>
+    <color name="price_red">#ff5339</color>
+    <color name="account_selected_color">#BDBDBD</color>
+    <color name="type_gray">#f8f8f8</color>
+
+
 </resources>
