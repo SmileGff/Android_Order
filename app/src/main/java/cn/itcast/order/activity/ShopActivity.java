@@ -3,6 +3,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -56,6 +57,7 @@ public class ShopActivity extends AppCompatActivity {
         Request request = new Request.Builder().url(Constant.WEB_SITE +
                 Constant.REQUEST_SHOP_URL).build();
         Call call = okHttpClient.newCall(request);
+        Log.i("ShopActivity",call.toString());
         // 开启异步线程访问网络
         call.enqueue(new Callback() {
             @Override
@@ -68,7 +70,7 @@ public class ShopActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call call, IOException e) {
-
+                Log.i("ShopActivity",e.getMessage());
             }
         });
     }
