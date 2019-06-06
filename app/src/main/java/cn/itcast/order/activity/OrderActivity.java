@@ -26,7 +26,6 @@ public class OrderActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order);
         //获取购物车中的数据
         carFoodList= (List<FoodBean>) getIntent().getSerializableExtra("carFoodList");
         //获取购物车中菜的总价格
@@ -34,6 +33,8 @@ public class OrderActivity extends AppCompatActivity {
         //获取店铺的配送费
         distributionCost=new BigDecimal(getIntent().getStringExtra(
                 "distributionCost"));
+        setContentView(R.layout.activity_order);
+
         initView();
         setData();
     }
