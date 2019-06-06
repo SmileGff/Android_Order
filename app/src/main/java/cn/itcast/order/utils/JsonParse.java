@@ -1,7 +1,11 @@
 package cn.itcast.order.utils;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -18,7 +22,19 @@ public class JsonParse {
         }
         return instance;
     }
-    public List<ShopBean> getShopList(String json) {
+    public List<ShopBean> getShopList(String json)  {
+//        try {
+//            JSONArray jsonArray = new JSONArray(json);
+//            for(int i=0;i<jsonArray.length();i++){
+//                JSONObject jsonObject=jsonArray.getJSONObject(i);
+//                ShopBean shopBean=new ShopBean();
+//                shopBean.setId(jsonObject.getInt("id"));
+//                shopBean.setShopName(jsonObject.getString("shopName"));
+//
+//            }
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
         Gson gson = new Gson(); // 使用gson库解析JSON数据
         // 创建一个TypeToken的匿名子类对象，并调用对象的getType()方法
         Type listType = new TypeToken<List<ShopBean>>() {
