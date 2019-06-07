@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".activity.FoodActivity"/>
+        <activity android:name=".activity.OrderActivity"/>
+        <activity android:name=".activity.FoodActivity"
+            android:theme="@style/Theme.ActivityDialogStyle"/>
         <activity android:name=".activity.ShopActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
