@@ -324,7 +324,7 @@ public class ShopDetailActivity extends AppCompatActivity implements View.
         if (bean == null) return;
         tv_shop_name.setText(bean.getShopName()); //设置店铺名称
         tv_time.setText(bean.getTime());            //设置配送时间
-        tv_notice.setText(bean.getShopNotice());  //设置店铺公告
+        tv_notice.setText("公告："+bean.getWelfare());  //设置店铺公告
         tv_not_enough.setText("￥" + bean.getOfferPrice() + "起送"); //设置起送价格
         Glide.with(this)
                 .load(bean.getShopPic())
